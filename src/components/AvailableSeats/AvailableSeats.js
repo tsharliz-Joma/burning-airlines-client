@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import axios from 'axios'
 import './AvailableSeats.css'
 
-const railsBaseUrl = 'https://localhost:3000/flights.json'
+const railsBaseUrl = 'https://localhost:3000/search.json'
 
 class AvailableSeats extends Component {
     contructor(){

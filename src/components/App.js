@@ -5,7 +5,11 @@ import Search from "../pages/Search";
 import Home from "../pages/Home";
 import Login from "../auth/Login";
 import Airplanes from "../pages/Airplanes";
+<<<<<<< HEAD
 import Flights from "../pages/Flights"
+=======
+import Flight from "../pages/Flight";
+>>>>>>> 59011dc28667723c2544aa022829a9129c815190
 // import Registration from "../auth/Registration";
 
 export default class App extends Component {
@@ -14,7 +18,7 @@ export default class App extends Component {
 
     this.state = {
       loggedInStatus: "NOT_LOGGED_IN",
-      currentUser: undefined
+      currentUser: undefined,
     };
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -33,7 +37,7 @@ export default class App extends Component {
         ) {
           this.setState({
             loggedInStatus: "LOGGED_IN",
-            currentUser: response.data.user.id
+            currentUser: response.data.user.id,
           });
         } else if (
           !response.data.logged_in &&
@@ -61,15 +65,16 @@ export default class App extends Component {
     console.log("logging in", data);
     this.setState({
       loggedInStatus: "LOGGED_IN",
-      currentUser: data.user.id
+      currentUser: data.user.id,
     });
+    window.location.href = "/search";
   }
 
   handleLogout() {
     console.log("trying to logout");
     this.setState({
       loggedInStatus: "NOT_LOGGED_IN",
-      currentUser: undefined
+      currentUser: undefined,
     });
   }
 
@@ -90,9 +95,27 @@ export default class App extends Component {
               }
             />
             <Route path="login" element={<Login />} />
-            <Route path="search" element={<Search loggedInStatus={this.state.loggedInStatus} currentUser={this.state.currentUser} handleLogout={this.handleLogout} />} />
+            <Route
+              path="search"
+              element={
+                <Search
+                  loggedInStatus={this.state.loggedInStatus}
+                  currentUser={this.state.currentUser}
+                  handleLogout={this.handleLogout}
+                />
+              }
+            />
             <Route path="airplanes" element={<Airplanes />} />
+<<<<<<< HEAD
             <Route path="flights" element={<Flights />} />
+=======
+            <Route path="flight">
+              <Route
+                path=":flightId"
+                element={<Flight currentUser={this.state.currentUser} />}
+              />
+            </Route>
+>>>>>>> 59011dc28667723c2544aa022829a9129c815190
           </Routes>
         </BrowserRouter>
       </div>

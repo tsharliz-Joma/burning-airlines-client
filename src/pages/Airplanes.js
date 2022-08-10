@@ -40,7 +40,7 @@ class Airplanes extends Component {
   render() {
     return (
       <div>
-        <h1>ADMIN: Create a new airplane</h1>
+        <h1>ADMIN: Commission a new airplane for service</h1>
         <AirplaneForm onSubmit={this.saveAirplane} />
         <AirplanesList airplanes={this.state.airplanes} />
       </div>
@@ -51,14 +51,6 @@ class Airplanes extends Component {
 const AirplaneForm = (props) => {
   const [content, setContent] = useState("");
 
-<<<<<<< HEAD
-    const _handleSubmit = (e) => {
-        e.preventDefault();
-        props.onSubmit(content);
-        setContent('');
-        console.log("Hey, I work");
-    };
-=======
   const _handleSubmit = (e) => {
     e.preventDefault();
     props.onSubmit(content);
@@ -66,7 +58,6 @@ const AirplaneForm = (props) => {
     console.log(content.name);
     setContent("");
   };
->>>>>>> be9e0a3e8f5c18cf3a11525a81ef3f3117e7f525
 
   const _handleChange = (e) => {
     const name = e.target.name;
@@ -105,9 +96,9 @@ const AirplaneForm = (props) => {
 const AirplanesList = (props) => {
   return (
     <div>
-      <p>{props.airplanes.length} All Airplanes: </p>
-      {props.airplanes.map((s) => (
-        <p key={s.id}>{s.content}</p>
+      <h3>There are {props.airplanes.length} total airworthy airplanes, ready for service! </h3>
+      {props.airplanes.map((a) => (
+        <p> Plane Model: { a.name } Total seats: {a.cols * a.rows} Total columns: {a.cols} Rows: {a.rows}</p>
       ))}
     </div>
   );
