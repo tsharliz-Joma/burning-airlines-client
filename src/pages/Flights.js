@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 
-
 // Im unsure if we will need this, this is creating a flight as an admin, 
 // This Page is to display all the available flights , so the referring to the burning airlines brief /flights page 
 class Flights extends Component {
