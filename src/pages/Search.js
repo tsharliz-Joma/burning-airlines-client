@@ -15,11 +15,11 @@ class Search extends Component {
   }
 
   componentDidMount(){
-    const fetchFlights = () => {
-      axios(planesUrl).then((response) => {
-        this.
-      })
-    }
+    // const fetchFlights = () => {
+    //   axios(planesUrl).then((response) => {
+    //     this.
+    //   })
+    // }
   }
 
   render() {
@@ -33,9 +33,9 @@ class Search extends Component {
         <SearchForm />
         <h4> Flight Results </h4>
         <p> And the best deals found for your search are..</p>
-        {this.state.flights.map(flight => {
+        {/* {this.state.flights.map(flight => {
 
-        })}
+        })} */}
       </div>
     );
   }
