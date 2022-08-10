@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Flights from "./Flight/Flights";
 import Reservation from "./Reservation/Reservation";
 import NavBar from "./navBar";
+import Airplanes from './pages/Airplanes';
 
 
 
