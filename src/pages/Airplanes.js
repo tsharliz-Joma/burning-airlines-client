@@ -93,10 +93,13 @@ const AirplaneForm = (props) => {
   );
 };
 
+
 const AirplanesList = (props) => {
   return (
     <div>
       <h3>There are {props.airplanes.length} total airworthy airplanes, ready for service! </h3>
+
+      
       {props.airplanes.map((a) => (
         <p> Plane Model: { a.name } Total seats: {a.cols * a.rows} Total columns: {a.cols} Rows: {a.rows}</p>
       ))}
