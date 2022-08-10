@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Login from "../auth/Login";
+import '../components/Home.css'
 
 export default class Home extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ export default class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div class="container">
         <h1>Home</h1>
         <h1>Status: {this.props.loggedInStatus}</h1>
         <h2>Hello user ID#{this.props.currentUser}</h2>
