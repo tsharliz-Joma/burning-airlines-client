@@ -12,14 +12,19 @@ class Search extends Component {
       to: "",
       flights: []
     };
+
+   
   }
 
+ 
   componentDidMount(){
     const fetchFlights = () => {
       axios(planesUrl).then((response) => {
-        this.
+        this.setState({ flights: response.data})
       })
     }
+    fetchFlights()
+
   }
 
   render() {
@@ -33,13 +38,31 @@ class Search extends Component {
         <SearchForm />
         <h4> Flight Results </h4>
         <p> And the best deals found for your search are..</p>
-        {this.state.flights.map(flight => {
+        
 
-        })}
+        {/* Im thinkin maybe put this entire thing into a class component */}
+        {this.state.flights.map((flight) => {
+          console.log(this.state.flights)
+          return(
+            <div>
+              <ul>
+                <h3>Flight: { flight.name } </h3>
+                <li><em>To:</em> { flight.to }</li>
+                <li><em>From:</em> { flight.from }</li>
+                <li>Date: { flight.date }</li>
+                <li>Plane: { flight.plane }</li>
+              </ul>
+            </div>
+            )
+          })
+        }
+
       </div>
     );
   }
 }
+
+
 
 const SearchForm = (props) => {
   const [from, setFrom] = useState("");
@@ -47,17 +70,17 @@ const SearchForm = (props) => {
 
   const _handleSubmit = (event) => {
     event.preventDefault();
-    props.onSubmit(from);
+    //props.onSubmit(from);
     //reset state
     setFrom("");
   };
 
   const _handleFrom = (event) => {
-    setFrom(event.target.value);
+    this.setFrom({from: event.target.value});
   };
 
   const _handleTo = (event) => {
-    setTo(event.target.value);
+    this.setTo({to: event.target.value});
   };
 
   return (
