@@ -2,13 +2,24 @@
 import React, { Component, useState } from "react";
 import axios from "axios";
 
+const planesUrl = 'http://localhost:3000/flights.json'
+
 class Search extends Component {
   constructor() {
     super();
     this.state = {
       from: "",
       to: "",
+      flights: []
     };
+  }
+
+  componentDidMount(){
+    const fetchFlights = () => {
+      axios(planesUrl).then((response) => {
+        this.
+      })
+    }
   }
 
   render() {
@@ -20,6 +31,11 @@ class Search extends Component {
         <h2>Current user ID: {this.props.currentUser}</h2>
 
         <SearchForm />
+        <h4> Flight Results </h4>
+        <p> And the best deals found for your search are..</p>
+        {this.state.flights.map(flight => {
+
+        })}
       </div>
     );
   }
@@ -45,11 +61,11 @@ const SearchForm = (props) => {
   };
 
   return (
-    <form onSubmit={_handleSubmit}>
-      <input onChange={_handleFrom} placeholder="From" />
-      <input onChange={_handleTo} placeholder="To" />
-      <button>Search Flights</button>
-    </form>
+      <form onSubmit={_handleSubmit}>
+        <input onChange={_handleFrom} placeholder="From" />
+        <input onChange={_handleTo} placeholder="To" />
+        <button>Search Flights</button>
+      </form>
   );
 };
 
