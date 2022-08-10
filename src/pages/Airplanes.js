@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import axios from 'axios';
 
-const SERVER_URL = 'http://localhost:3000/PLACEHOLDER.json'; // IMPORTANT - CHANGE TO AIRPLANES URL PAGE FROM RAILS
+const SERVER_URL = 'http://localhost:3000/airplanes.json'; // IMPORTANT - CHANGE TO AIRPLANES URL PAGE FROM RAILS
 
 class Airplanes extends Component {
     constructor() {
@@ -25,7 +25,7 @@ class Airplanes extends Component {
         fetchAirplanes();
     }
 
-    saveAirplane(content) {
+    saveAirplane(content) { //         SAVES AIRPLANE DATA TO THE DATABASE
         axios.post(SERVER_URL, { content: content }).then((response) => {
             this.setState({airplanes: [response.data, ...this.state.airplanes]})
         });
@@ -52,13 +52,20 @@ const AirplaneForm = (props) => {
     };
 
     const _handleChange = (e) => {
-        setContent(e.target.value);
+        const name = e.target.name;
+        const value = e.target.value;
+        setContent(values => ({ ...values, [name]: value }));
     };
 
     return (
         <form onSubmit={ _handleSubmit }>
             <textarea onChange={ _handleChange } value={ content } required></textarea>
-            <input type="submit" value="Tell" />
+            <input name="name" type="text" value="name" />
+            <textarea onChange={ _handleChange } value={ content } required></textarea>
+            <input name="rows" type="integer" value="rows" />
+            <textarea onChange={ _handleChange } value={ content } required></textarea>
+            <input name="columns" type="integer" value="columns" />
+            <input type="submit" value="Create Airplane" />
         </form>
     );
 };
