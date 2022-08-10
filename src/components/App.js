@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Flights from "./pages/Flights";
-import Reservation from "./Reservation/Reservation";
+import Flights from "../pages/Flights";
+import Reservation from "../pages/Reservation";
 import NavBar from "./navBar";
-import Airplanes from './pages/Airplanes';
+import Airplanes from '../pages/Airplanes';
 
 
 
