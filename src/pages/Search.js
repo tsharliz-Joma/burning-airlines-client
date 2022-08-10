@@ -15,14 +15,6 @@ class SearchBar extends Component {
         this._handleDestination = this._handleDestination(this)
     }
 
-    _handleOrigin(event){
-        this.setState({origin: event.target.origin})
-    }
-
-    _handleDestination(event){
-        this.setState({destination: event.target.destination})
-    }
-
     // So im thinking that we will need to render flight options from the backend ?
     _renderFlightOptions(){
         return( 
@@ -33,9 +25,38 @@ class SearchBar extends Component {
             })
         )
     }
+    
+        _handleOrigin = (e) => {
+            this.setState({origin: e.target.origin})
+        };
+        
+        _handleDestination = (e) => {
+            this.setState({destination: e.target.destination})
+        };
+    
+        _handleSearch = (e) => {
+            e.preventDefault();
+            this.props.SearchFlights(this.state.origin, this.state.destination)
+        };
 
-    _handleSearch(event){
-        event.preventDefault();
-        this.props.SearchFlights(this.origin, this.destination)
-    }
+    render(){
+        return (
+            <div>
+                <div classs="search-entry-fields">
+                    <input onChange={ this._handleOrigin } placeholder="From" />
+                    <input onChange={ this._handleDestination } placeholder="To" /> 
+                </div>
+                <div>
+                    <a onClick={ this._handleSearch } >Search Flights</a>
+                </div>
+            </div>
+            
+        )
+    };
 }
+
+
+
+    
+
+    
