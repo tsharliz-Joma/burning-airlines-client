@@ -49,6 +49,7 @@ const AirplaneForm = (props) => {
         e.preventDefault();
         props.onSubmit(content);
         setContent('');
+        console.log("Hey, I work");
     };
 
     const _handleChange = (e) => {
