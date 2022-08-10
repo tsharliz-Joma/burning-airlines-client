@@ -1,15 +1,12 @@
-import React, { Component } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
-import Search from "../pages/Search";
-import Home from "../pages/Home";
-import Login from "../auth/Login";
-import Airplanes from "../pages/Airplanes";
-<<<<<<< HEAD
-import Flights from "../pages/Flights"
-=======
-import Flight from "../pages/Flight";
->>>>>>> 59011dc28667723c2544aa022829a9129c815190
+import React, { Component } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import axios from 'axios';
+import Search from '../pages/Search';
+import Home from '../pages/Home';
+import Login from '../auth/Login';
+import Airplanes from '../pages/Airplanes';
+import Flight from '../pages/Flight';
+import Flights from '../pages/Flights';
 // import Registration from "../auth/Registration";
 
 export default class App extends Component {
@@ -17,7 +14,7 @@ export default class App extends Component {
     super();
 
     this.state = {
-      loggedInStatus: "NOT_LOGGED_IN",
+      loggedInStatus: 'NOT_LOGGED_IN',
       currentUser: undefined,
     };
 
@@ -28,28 +25,28 @@ export default class App extends Component {
 
   checkLoginStatus() {
     axios
-      .get("http://localhost:3000/logged_in", { withCredentials: true })
+      .get('http://localhost:3000/logged_in', { withCredentials: true })
       .then((response) => {
-        console.log("TEST", response);
+        console.log('TEST', response);
         if (
           response.data.logged_in &&
-          this.state.loggedInStatus === "NOT_LOGGED_IN"
+          this.state.loggedInStatus === 'NOT_LOGGED_IN'
         ) {
           this.setState({
-            loggedInStatus: "LOGGED_IN",
+            loggedInStatus: 'LOGGED_IN',
             currentUser: response.data.user.id,
           });
         } else if (
           !response.data.logged_in &&
-          this.state.loggedInStatus === "LOGGED_IN"
+          this.state.loggedInStatus === 'LOGGED_IN'
         ) {
           this.setState({
-            loggedInStatus: "NOT_LOGGED_IN",
+            loggedInStatus: 'NOT_LOGGED_IN',
           });
         }
       })
       .catch((error) => {
-        console.log("login error", error);
+        console.log('login error', error);
       });
   }
 
@@ -62,18 +59,18 @@ export default class App extends Component {
   }
 
   handleLogin(data) {
-    console.log("logging in", data);
+    console.log('logging in', data);
     this.setState({
-      loggedInStatus: "LOGGED_IN",
+      loggedInStatus: 'LOGGED_IN',
       currentUser: data.user.id,
     });
-    window.location.href = "/search";
+    window.location.href = '/search';
   }
 
   handleLogout() {
-    console.log("trying to logout");
+    console.log('trying to logout');
     this.setState({
-      loggedInStatus: "NOT_LOGGED_IN",
+      loggedInStatus: 'NOT_LOGGED_IN',
       currentUser: undefined,
     });
   }
@@ -106,16 +103,13 @@ export default class App extends Component {
               }
             />
             <Route path="airplanes" element={<Airplanes />} />
-<<<<<<< HEAD
-            <Route path="flights" element={<Flights />} />
-=======
             <Route path="flight">
               <Route
                 path=":flightId"
                 element={<Flight currentUser={this.state.currentUser} />}
               />
+              <Route path="flights" element={<Flights />} />
             </Route>
->>>>>>> 59011dc28667723c2544aa022829a9129c815190
           </Routes>
         </BrowserRouter>
       </div>
