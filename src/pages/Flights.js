@@ -1,9 +1,9 @@
-// admin panel to make flights
-
 import React, { Component } from 'react';
+import axios from "axios";
 
-// Im unsure if we will need this, this is creating a flight as an admin, 
-// This Page is to display all the available flights , so the referring to the burning airlines brief /flights page 
+const SERVER_URL = "http://localhost:3000/flights.json"; // IMPORTANT - CHANGE TO AIRPLANES URL PAGE FROM RAILS
+
+
 class Flights extends Component {
     constructor(){
         super();
@@ -28,7 +28,6 @@ class Flights extends Component {
                     <input placeholder="to" type="text"></input>
                     <input placeholder="from" type="text"></input>
                 </div>
-                {/* */}
                 <table>
                     <thead>
                         <tr>
@@ -56,8 +55,7 @@ class Flights extends Component {
                 </table>
 
                 <button>Cancel</button>
-                <button>Confirm</button> {/* On Confirm this confirms the creation of the plane as an admin */}
-
+                <button>Confirm</button>
             </div>
         )
     }

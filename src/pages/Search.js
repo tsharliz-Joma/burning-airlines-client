@@ -25,6 +25,7 @@ class Search extends Component {
     }
     fetchFlights()
 
+
   }
 
   render() {
@@ -38,8 +39,6 @@ class Search extends Component {
         <SearchForm />
         <h4> Flight Results </h4>
         <p> And the best deals found for your search are..</p>
-        
-
         {/* Im thinkin maybe put this entire thing into a class component */}
         {this.state.flights.map((flight) => {
           console.log(this.state.flights)
@@ -56,7 +55,6 @@ class Search extends Component {
             )
           })
         }
-
       </div>
     );
   }
