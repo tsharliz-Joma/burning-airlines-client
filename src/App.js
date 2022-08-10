@@ -4,6 +4,7 @@ import axios from "axios";
 import Search from "./pages/Search";
 import Home from "./pages/Home";
 import Login from "./auth/Login";
+import Airplanes from "./pages/Airplanes";
 // import Registration from "../auth/Registration";
 
 export default class App extends Component {
@@ -89,6 +90,7 @@ export default class App extends Component {
             />
             <Route path="login" element={<Login />} />
             <Route path="search" element={<Search loggedInStatus={this.state.loggedInStatus} currentUser={this.state.currentUser} handleLogout={this.handleLogout} />} />
+            <Route path="airplanes" element={<Airplanes />} />
           </Routes>
         </BrowserRouter>
       </div>
