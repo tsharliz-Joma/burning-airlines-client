@@ -1,0 +1,13 @@
+.available-seats-container {
+    width: 200px;
+    height: 100px;
+}
+
+.seats-container {
+    
+}
+
+.seat {
+    width: 50px;
+    height: 30px;
+}

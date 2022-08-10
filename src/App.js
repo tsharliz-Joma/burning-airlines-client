@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Flights from "./components/Flight/Flights";
-import Reservation from "./components/Reservation/Reservation";
 import NavBar from "./components/navBar";
 
 
@@ -27,8 +25,7 @@ class App extends Component {
           <h1>seniL riA gninruB</h1>
           <NavBar />
           <h3>Welcome (Users Name)</h3>
-          <button>Login</button> {/* cliclking here renders the Flight Page ?/  we will need to learn conditional rendering */} 
-          <Reservation />
+          <button>Login</button> {/* clicking here renders the Flight Page ?/  we will need to learn conditional rendering */} 
         </div>   
       );
   }
