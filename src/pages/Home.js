@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Login from "../auth/Login";
-import '../components/Home.css'
+
 
 export default class Home extends Component {
   constructor(props) {
