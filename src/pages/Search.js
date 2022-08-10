@@ -1,87 +1,56 @@
 // for the user to search up a flight
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component, useState } from "react";
+import axios from "axios";
 
-class SearchBar extends Component {
-    // constructor(props){
-    //     super(props);
+class Search extends Component {
+  constructor() {
+    super();
+    this.state = {
+      from: "",
+      to: "",
+    };
+  }
 
-    //     this.state = {
-    //         origin: '',
-    //         destination: '',
-    //         flights: []
-    //     }
+  render() {
+    console.log(this.props);
 
-    //     this._handleOrigin = this._handleOrigin.bind(this)
-    //     this._handleDestination = this._handleDestination(this)
-    // }
+    return (
+      <div>
+        <h1>please work dear god</h1>
+        <h2>Current user ID: {this.props.currentUser}</h2>
 
-    // _fetchFlights() { // Fetch the flights 
-    //     const res = axios(  + `/${this.state.origin}` + `/${this.state.destination}`).then((response) => {
-    //         this.setState({flights: [...this.state.flights, res.data]})
-    //     })
-    // }
-
-    // // So im thinking that we will need to render flight options from the backend ?
-    // _renderFlightOptions(){
-    //     return( 
-    //         Object.keys(this.state.flights).map(flight => {
-    //             return(
-    //                 <ul>
-    //                     <li> { flight.from } </li>
-    //                     <li> { flight.to } </li>
-    //                     <li> { flight.date }</li>
-    //                 </ul>
-    //             )
-    //         })
-    //     )
-    // }
-    
-    //     _handleOrigin = (e) => {
-    //         this.setState({origin: e.target.origin})
-    //     };
-        
-    //     _handleDestination = (e) => {
-    //         this.setState({destination: e.target.destination})
-    //     };
-    
-    //     _handleSearch = (e) => {
-    //         e.preventDefault();
-    //         this.props.SearchFlights()
-    //     };
-
-    // render(){
-    //     return (
-    //         <div>
-    //             <form onSubmit={ this._handleSearch }>
-    //                     <input onChange={ this._handleOrigin } placeholder="From" />
-    //                     <input onChange={ this._handleDestination } placeholder="To" /> 
-    //                 <button>Search Flights</button>
-    //             </form>
-
-    //             <tr> 
-    //                 <td></td>
-    //                 <td></td>
-    //                 <td></td>
-    //             </tr>
-    //         </div>
-            
-    //     )
-    // };
-
-    render() {
-        return (
-            <div>
-                <h1>please work dear god</h1>
-            </div>
-        );
-    }
+        <SearchForm />
+      </div>
+    );
+  }
 }
 
-export default SearchBar 
+const SearchForm = (props) => {
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
 
+  const _handleSubmit = (event) => {
+    event.preventDefault();
+    props.onSubmit(from);
+    //reset state
+    setFrom("");
+  };
 
+  const _handleFrom = (event) => {
+    setFrom(event.target.value);
+  };
 
-    
+  const _handleTo = (event) => {
+    setTo(event.target.value);
+  };
 
-    
+  return (
+    <form onSubmit={_handleSubmit}>
+      <input onChange={_handleFrom} placeholder="From" />
+      <input onChange={_handleTo} placeholder="To" />
+      <button>Search Flights</button>
+    </form>
+  );
+};
+
+export default Search;
