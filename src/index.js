@@ -10,8 +10,4 @@ root.render(
   </React.StrictMode>
 );
 
-<<<<<<< HEAD
 reportWebVitals();
-=======
-reportWebVitals();
->>>>>>> e3b26d5c184c1f488b3cf59d575f362ea58a7273
