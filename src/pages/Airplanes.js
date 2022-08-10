@@ -59,12 +59,9 @@ const AirplaneForm = (props) => {
 
     return (
         <form onSubmit={ _handleSubmit }>
-            <textarea onChange={ _handleChange } value={ content } required></textarea>
-            <input name="name" type="text" value="name" />
-            <textarea onChange={ _handleChange } value={ content } required></textarea>
-            <input name="rows" type="integer" value="rows" />
-            <textarea onChange={ _handleChange } value={ content } required></textarea>
-            <input name="columns" type="integer" value="columns" />
+            <input onChange={ _handleChange } name="name" type="text" placeholder="name" required/>
+            <input onChange={ _handleChange } name="rows" type="integer" placeholder="rows" required/>
+            <input onChange={ _handleChange } name="columns" type="integer" placeholder="columns" required/>
             <input type="submit" value="Create Airplane" />
         </form>
     );
