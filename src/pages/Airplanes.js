@@ -54,8 +54,6 @@ const AirplaneForm = (props) => {
   const _handleSubmit = (e) => {
     e.preventDefault();
     props.onSubmit(content);
-    console.log(content);
-    console.log(content.name);
     setContent("");
   };
 
@@ -88,7 +86,7 @@ const AirplaneForm = (props) => {
         placeholder="columns"
         required
       />
-      <input type="submit" value="Create Airplane" />
+      <input type="submit" value="Commission Airplane!" />
     </form>
   );
 };

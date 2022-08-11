@@ -7,7 +7,8 @@ import Login from '../auth/Login';
 import Airplanes from '../pages/Airplanes';
 import Flight from '../pages/Flight';
 import Flights from '../pages/Flights';
-import './Css/App.css'
+import '../index.css'; 
+
 // import Registration from "../auth/Registration";
 
 export default class App extends Component {
@@ -104,12 +105,12 @@ export default class App extends Component {
               }
             />
             <Route path="airplanes" element={<Airplanes />} />
+            <Route path="flights" element={<Flights />} />
             <Route path="flight">
               <Route
                 path=":flightId"
                 element={<Flight currentUser={this.state.currentUser} />}
               />
-              <Route path="flights" element={<Flights />} />
             </Route>
           </Routes>
         </BrowserRouter>
