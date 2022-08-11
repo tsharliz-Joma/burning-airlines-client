@@ -13,6 +13,7 @@ class Flights extends Component {
       this.saveFlight = this.saveFlight.bind(this);
     }
 
+
     componentDidMount() {
         //        REFRESHES THE PAGE WITH POLLING WITH UPDATES AIRPLANES DATA
         const fetchFlights = () => {
@@ -21,7 +22,13 @@ class Flights extends Component {
           });
           setTimeout(fetchFlights, 9000);
         };
-    
+        const fetchAirplanes = () => {
+            axios(SERVER_URL).then((response) => {
+                this.setState({ airplanes: response.data });
+            });
+        }
+        fetchAirplanes();
+        console.log("we are fetching airplanes")
         fetchFlights();
       }
 
@@ -56,8 +63,6 @@ class Flights extends Component {
     const _handleSubmit = (e) => {
         e.preventDefault();
         props.onSubmit(content);
-        console.log(content);
-        console.log(content.name);
         setContent("");
     };
 
@@ -104,15 +109,15 @@ class Flights extends Component {
                 placeholder="plane"
                 required
               />
-              <label for="planes">Choose a plane:</label>
 
-            <select name="planes" id="planes">
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
+              <label for="planes">Choose a plane:
+              <select value="" onChange={_handleChange}>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
             </select>
-
+            </label>
               <input type="submit" value="Create New Flight" />
             </form>
           );
