@@ -72,7 +72,7 @@ return (
   { props.flights.map((f) => (
     <tr>
     <td>{f.date}</td>
-    <td>{f.name}</td>
+    <td><a href={`/flight/${f.id}`}>{f.name}</a></td>
     <td>{f.from} To {f.to}</td>
     <td>{f.plane}</td>
     </tr>
