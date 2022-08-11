@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-// import DisplayFlight from "../components/DisplayFlight";
-// import AvailableSeats from "../components/AvailableSeats/AvailableSeats";
 
 const Flight = (props) => {
   const [flight, setFlight] = useState("");
@@ -58,7 +56,7 @@ const SeatingDiagram = (props) => {
       setCols(targetPlane.cols);
       console.log("TARGET PLANE:", targetPlane);
     });
-  }, []);
+  }, [props]);
 
   const numRows = [...Array(rows).keys()];
   const alphabet = [
