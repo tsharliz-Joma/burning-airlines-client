@@ -1,0 +1,17 @@
+
+.container {
+    width: 1000px;
+    height: 950px;
+    margin-left: -150px;
+    background-position: 50% ;
+    background-size: cover;
+    background-repeat:space;
+    background-image: url('/src/images/Seats-B757-Background.png');
+}
+
+
+input {
+    padding: 50px;
+    margin: 25px;
+}
+

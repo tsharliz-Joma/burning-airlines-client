@@ -1,5 +1,6 @@
 // for the user to search up a flight
 import React, { Component, useState } from "react";
+import '../components/Css/App.css'
 import axios from "axios";
 
 const SEARCH_URL = `http://localhost:3000/search/`
@@ -7,7 +8,7 @@ const SEARCH_URL = `http://localhost:3000/search/`
 class Search extends Component {
   render() {
     return (
-      <div>
+      <div className="container">
         <h1>please work dear god</h1>
         <h2>Current user ID: {this.props.currentUser}</h2>
 
@@ -42,13 +43,14 @@ const SearchForm = () => {
   };
 
   return (
-    <div>
+    <div class="flames">
       <form onSubmit={_handleSubmit}>
         <input onChange={_handleFrom} placeholder="From" />
         <input onChange={_handleTo} placeholder="To" />
         <button>Search Flights</button>
+        
       </form>
-
+      
       <h4> Flight Results </h4>
         <FlightsList  flights={ flights }/>
         </div>
@@ -57,9 +59,10 @@ const SearchForm = () => {
 
 const FlightsList = (props) => { 
 return (
-  <div>
-  <p> { props.flights.length } Flights Available </p>
-  <table>
+<div >
+  <p> Flights Available </p>
+
+  <table class="flames">
   <tr>
     <th>Date</th>
     <th>Flight</th>
@@ -70,12 +73,12 @@ return (
     <tr>
     <td>{f.date}</td>
     <td>{f.name}</td>
-    <td>{f.from} to {f.to}</td>
+    <td>{f.from} To {f.to}</td>
     <td>{f.plane}</td>
     </tr>
   )) }
   </table>
-  
+  <img src={'./src/images/fire-animated.gif'} alt="fire" />
 </div>
 );
 }
