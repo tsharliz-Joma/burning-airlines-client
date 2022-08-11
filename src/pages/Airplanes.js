@@ -86,7 +86,7 @@ const AirplaneForm = (props) => {
         placeholder="columns"
         required
       />
-      <input type="submit" value="Commission Airplane" />
+      <input type="submit" value="Commission Airplane!" />
     </form>
   );
 };

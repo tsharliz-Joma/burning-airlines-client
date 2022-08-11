@@ -7,6 +7,7 @@ import Login from '../auth/Login';
 import Airplanes from '../pages/Airplanes';
 import Flight from '../pages/Flight';
 import Flights from '../pages/Flights';
+import '../index.css'; 
 // import Registration from "../auth/Registration";
 
 export default class App extends Component {

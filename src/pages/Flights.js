@@ -104,6 +104,15 @@ class Flights extends Component {
                 placeholder="plane"
                 required
               />
+              <label for="planes">Choose a plane:</label>
+
+            <select name="planes" id="planes">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+            </select>
+
               <input type="submit" value="Create New Flight" />
             </form>
           );
