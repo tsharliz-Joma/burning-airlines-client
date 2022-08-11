@@ -40,7 +40,7 @@ class Airplanes extends Component {
   render() {
     return (
       <div>
-        <h1>ADMIN: Create a new airplane</h1>
+        <h1>ADMIN: Commission a new airplane for service</h1>
         <AirplaneForm onSubmit={this.saveAirplane} />
         <AirplanesList airplanes={this.state.airplanes} />
       </div>
@@ -54,8 +54,6 @@ const AirplaneForm = (props) => {
   const _handleSubmit = (e) => {
     e.preventDefault();
     props.onSubmit(content);
-    console.log(content);
-    console.log(content.name);
     setContent("");
   };
 
@@ -88,17 +86,21 @@ const AirplaneForm = (props) => {
         placeholder="columns"
         required
       />
-      <input type="submit" value="Create Airplane" />
+      <input type="submit" value="Commission Airplane!" />
     </form>
   );
 };
 
+
 const AirplanesList = (props) => {
   return (
     <div>
-      <p>{props.airplanes.length} All Airplanes: </p>
-      {props.airplanes.map((s) => (
-        <p key={s.id}>{s.content}</p>
+      <h3>There are {props.airplanes.length} total airworthy airplanes, ready for service! </h3>
+
+
+      {props.airplanes.map((a) => (
+        <p> Plane Model: { a.name } Total seats: {a.cols * a.rows} Total columns: {a.cols} Rows: {a.rows} <br></br></p>
+        
       ))}
     </div>
   );
