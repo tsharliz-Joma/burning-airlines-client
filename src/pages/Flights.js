@@ -111,14 +111,15 @@ class Flights extends Component {
               />
 
               <label for="planes">Choose a plane:
-              <select value="" onChange={_handleChange}>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
+              <select value="horses" onChange={_handleChange}>
+            <option value="747">747</option>
+            <option value="757">757</option>
+            <option value="yogurt">Yogurt</option>
+            <option value="tumbleweed">Pixies</option>
             </select>
             </label>
               <input type="submit" value="Create New Flight" />
+              <img src={"../src/images/fire-animated.jpeg"} alt="fire" />
             </form>
           );
         };

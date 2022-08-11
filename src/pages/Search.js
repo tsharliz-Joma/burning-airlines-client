@@ -78,7 +78,8 @@ return (
     </tr>
   )) }
   </table>
-  <img src={'./src/images/fire-animated.gif'} alt="fire" />
+  <img src={"../src/images/fire-animated.gif"} alt="horse" /> 
+  <img src={"../src/images/fire.jpeg"} alt="fire" />
 </div>
 );
 }
