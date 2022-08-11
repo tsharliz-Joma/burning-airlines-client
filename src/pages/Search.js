@@ -2,54 +2,29 @@
 import React, { Component, useState } from "react";
 import axios from "axios";
 
-const planesUrl = 'http://localhost:3000/flights.json'
+const SEARCH_URL = `http://localhost:3000/search/`
 
 class Search extends Component {
-  constructor() {
-    super();
-    this.state = {
-      from: "",
-      to: "",
-      flights: []
-    };
-  }
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     from: "",
+  //     to: "",
+  //     flights: []
+  //   };
 
- 
-  componentDidMount(){
-
-    const fetchFlights = () => {
-      axios(planesUrl).then((response) => {
-        this.setState({ flights: response.data})
-      })
-    }
-    fetchFlights()
-
-  }
-
-  searchFlights(from, to ){
-    axios.post(planesUrl, {
-      search: {
-        from: from,
-        to: to
-      }
-    }).then((response) => {
-      this.setState({ flights: [response.data, ...this.state.flights]})
-    })
-  }
+  //   this.searchFlights = this.searchFlights.bind(this)
+  // }
 
   render() {
-    //console.log(this.props);
-
     return (
       <div>
         <h1>please work dear god</h1>
         <h2>Current user ID: {this.props.currentUser}</h2>
 
-        <SearchForm onSumbit={ this.searchFlights }/>
-        <h4> Flight Results </h4>
-        <FlightsList  flights={ this.state.flights }/>
+        <SearchForm />
         
-        {
+        {/* {
           this.state.flights.map((flight) => {
           return(
             <div>
@@ -57,14 +32,14 @@ class Search extends Component {
                 <h3>Flight: { flight.name } </h3>
                 <li><em>To:</em> { flight.to }</li>
                 <li><em>From:</em> { flight.from }</li>
-                <li>Date: { flight.date }</li>
-                <li>Plane: { flight.plane }</li>
+                <li>Date: { flight.date } </li>
+                <li>Plane: { flight.plane } </li>
               </ul>
             </div>
             )
           }
           )
-        }
+        } */}
       
       </div>
     );
@@ -72,16 +47,19 @@ class Search extends Component {
 
 }
 
-const SearchForm = (props) => {
+const SearchForm = () => {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
+  const [flights, setFlights] = useState([{}]);
 
   const _handleSubmit = (event) => {
     event.preventDefault();
-    props.onSubmit(from);
-    //reset state
+    axios(SEARCH_URL + from + '/' + to + '.json').then((response) => {
+      setFlights(response.data);
+    })
+
     setFrom("");
-    setTo("")
+    setTo("");
   };
 
   const _handleFrom = (event) => {
@@ -93,19 +71,42 @@ const SearchForm = (props) => {
   };
 
   return (
+    <div>
       <form onSubmit={_handleSubmit}>
         <input onChange={_handleFrom} placeholder="From" />
         <input onChange={_handleTo} placeholder="To" />
         <button>Search Flights</button>
       </form>
+
+      <h4> Flight Results </h4>
+        <FlightsList  flights={ flights }/>
+        </div>
   );
 };
 
 const FlightsList = (props) => { 
+return (
   <div>
-    <p> { props.flights.length } Flights Available </p>
-    { props.flights.map((f)=> <p key={ f.id }> { f.content } </p>)}
-  </div>
+  <p> { props.flights.length } Flights Available </p>
+  <table>
+  <tr>
+    <th>Date</th>
+    <th>Flight</th>
+    <th>From-To</th>
+    <th>Plane</th>
+  </tr>
+  { props.flights.map((f) => (
+    <tr>
+    <td>{f.date}</td>
+    <td>{f.name}</td>
+    <td>{f.from} to {f.to}</td>
+    <td>{f.plane}</td>
+    </tr>
+  )) }
+  </table>
+  
+</div>
+);
 }
 
 export default Search;
