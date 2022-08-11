@@ -12,12 +12,11 @@ class Search extends Component {
       to: "",
       flights: []
     };
-
-   
   }
 
  
   componentDidMount(){
+
     const fetchFlights = () => {
       axios(planesUrl).then((response) => {
         this.setState({ flights: response.data})
@@ -25,23 +24,33 @@ class Search extends Component {
     }
     fetchFlights()
 
+  }
 
+  searchFlights(from, to ){
+    axios.post(planesUrl, {
+      search: {
+        from: from,
+        to: to
+      }
+    }).then((response) => {
+      this.setState({ flights: [response.data, ...this.state.flights]})
+    })
   }
 
   render() {
-    console.log(this.props);
+    //console.log(this.props);
 
     return (
       <div>
         <h1>please work dear god</h1>
         <h2>Current user ID: {this.props.currentUser}</h2>
 
-        <SearchForm />
+        <SearchForm onSumbit={ this.searchFlights }/>
         <h4> Flight Results </h4>
-        <p> And the best deals found for your search are..</p>
-        {/* Im thinkin maybe put this entire thing into a class component */}
-        {this.state.flights.map((flight) => {
-          console.log(this.state.flights)
+        <FlightsList  flights={ this.state.flights }/>
+        
+        {
+          this.state.flights.map((flight) => {
           return(
             <div>
               <ul>
@@ -53,14 +62,15 @@ class Search extends Component {
               </ul>
             </div>
             )
-          })
+          }
+          )
         }
+      
       </div>
     );
   }
+
 }
-
-
 
 const SearchForm = (props) => {
   const [from, setFrom] = useState("");
@@ -68,17 +78,18 @@ const SearchForm = (props) => {
 
   const _handleSubmit = (event) => {
     event.preventDefault();
-    //props.onSubmit(from);
+    props.onSubmit(from);
     //reset state
     setFrom("");
+    setTo("")
   };
 
   const _handleFrom = (event) => {
-    this.setFrom({from: event.target.value});
+    setFrom(event.target.value);
   };
 
   const _handleTo = (event) => {
-    this.setTo({to: event.target.value});
+    setTo(event.target.value);
   };
 
   return (
@@ -89,5 +100,12 @@ const SearchForm = (props) => {
       </form>
   );
 };
+
+const FlightsList = (props) => { 
+  <div>
+    <p> { props.flights.length } Flights Available </p>
+    { props.flights.map((f)=> <p key={ f.id }> { f.content } </p>)}
+  </div>
+}
 
 export default Search;
