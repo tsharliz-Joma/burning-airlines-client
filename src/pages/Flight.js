@@ -9,7 +9,7 @@ const Flight = (props) => {
   const { flightId } = useParams();
   const FLIGHT_URL = `http://localhost:3000/flights/${flightId}.json`;
   //checking if current user is passed down
-  //console.log("CURRENT USER ID: ", props.currentUser);
+  console.log("CURRENT USER ID: ", props.currentUser);
 
   useEffect(() => {
     axios(FLIGHT_URL).then((response) => {
@@ -22,57 +22,113 @@ const Flight = (props) => {
 
   return (
     <div>
-      <h1>Flight page with diagram coming soon</h1>
-      <h2>Flight {flight.name}</h2>
+      <h1>Flight {flight.name}</h1>
       <ul>
         <li>Date: {flight.date}</li>
-        <li>From: {flight.from}</li>
-        <li>To: {flight.to}</li>
+        <li>
+          {flight.from} to {flight.to}
+        </li>
         <li>Plane: {flight.plane}</li>
       </ul>
 
-      <SeatingDiagram plane={flight.plane} />
+      <SeatingDiagram
+        userId={props.currentUser}
+        flightId={flight.id}
+        planeName={flight.plane}
+      />
     </div>
   );
 };
 
 const SeatingDiagram = (props) => {
   const [plane, setPlane] = useState("");
-  const [rows, setRows] = useState(0);
-  const [cols, setCols] = useState(0); // letters
+  const [rows, setRows] = useState("");
+  const [cols, setCols] = useState(""); // letters
+  const PLANES_URL = `http://localhost:3000/airplanes.json`;
 
   useEffect(() => {
-    const PLANES_URL = `http://localhost:3000/airplanes.json`;
+    console.log("HELP");
     axios(PLANES_URL).then((response) => {
       const allPlanes = response.data;
-      const targetPlane = allPlanes.filter(p => p.name === props.plane)[0];
+      const targetPlane = allPlanes.filter(
+        (p) => p.name === props.planeName
+      )[0];
       setPlane(targetPlane);
       setRows(targetPlane.rows);
       setCols(targetPlane.cols);
+      console.log("TARGET PLANE:", targetPlane);
     });
-  }, [plane]);
+  }, []);
+
+  const numRows = [...Array(rows).keys()];
+  const alphabet = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
+  ];
+  const numCols = alphabet.slice(0, cols);
+
+  const RESERVATION_URL = "http://localhost:3000/reservations"
+
+  const makeReservation = (event) => {
+    console.log("Current user ID:", props.userId);
+    console.log("Flight ID:", props.flightId);
+    console.log("Seat number:", event.target.dataset.value);
+    const row = event.target.dataset.value.split(" ")[0];
+    const col = event.target.dataset.value.split(" ")[1];
+    console.log(row);
+    console.log(col);
+
+    axios.post(RESERVATION_URL, {
+      reservation: {
+        user_id: props.userId,
+        flight_id: props.flightId,
+        row: row,
+        col: col
+      }
+    });
+  };
 
   return (
     <div>
-      <h2>Airplane {plane.name}</h2>
-      <FuckingTable rows={rows} cols={cols} />
+      <h2>Airplane {props.planeName}</h2>
+      <table>
+        {numRows.map((row) => (
+          <tr>
+            {numCols.map((col) => (
+              <td
+                data-value={`${row + 1} ${numCols.indexOf(col) + 1}`}
+                onClick={makeReservation}
+              >{`${row + 1}${col}`}</td>
+            ))}
+          </tr>
+        ))}
+      </table>
     </div>
   );
 };
-
-const FuckingTable = (props) => {
-  return (
-    <table>
-      <FuckingRows rows={props.rows}/>
-    </table>
-  );
-};
-
-const FuckingRows = (props) => {
-  return (
-    <div>
-    </div>
-  );
-}
 
 export default Flight;
