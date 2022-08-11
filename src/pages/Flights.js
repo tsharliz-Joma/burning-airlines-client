@@ -1,64 +1,127 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import axios from "axios";
 
 const SERVER_URL = "http://localhost:3000/flights.json"; // IMPORTANT - CHANGE TO AIRPLANES URL PAGE FROM RAILS
 
-
 class Flights extends Component {
-    constructor(){
-        super();
-
-        this.state = {
-            date: '',
-            flightNume: '',
-            origin: '',
-            destination: '',
-            plane: '',
-        }
+    constructor() {
+      super();
+      this.state = {
+        flights: [],
+      };
+  
+      this.saveFlight = this.saveFlight.bind(this);
     }
 
+    componentDidMount() {
+        //        REFRESHES THE PAGE WITH POLLING WITH UPDATES AIRPLANES DATA
+        const fetchFlights = () => {
+          axios(SERVER_URL).then((response) => {
+            this.setState({ flights: response.data });
+          });
+          setTimeout(fetchFlights, 9000);
+        };
+    
+        fetchFlights();
+      }
 
-    render(){
-        return(
-            <div className="Flight">
-                
-                <div className="CreateFlight">
-                    <input placeholder="flight number" type="text"></input>
-                    <input placeholder="date" type="text"></input>
-                    <input placeholder="to" type="text"></input>
-                    <input placeholder="from" type="text"></input>
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th> Date </th> 
-                            <th> Flight </th>
-                            <th> From - To</th>
-                            <th> Plane </th>
-                        </tr>
-                         <tr>
-                            <td>12/04/2022</td>
-                            <td>47</td>
-                        </tr>
-                        <tr>
-                            <td>12/04/2022</td>
-                            <td>64</td>
-                            
-                        </tr>
-                        <tr>
-                            <td>12/04/2022</td>
-                            <td>34</td>
-                        </tr>
-                            
-                    </thead>
-                    
-                </table>
+    saveFlight(content) {
+        //         SAVES AIRPLANE DATA TO THE DATABASE
+        axios.post(SERVER_URL, { 
+            flight: {
+                name: content.name,
+                date: content.date,
+                from: content.from,
+                to:   content.to,
+                plane: content.plane
+        } }).then((response) => {
+          this.setState({ flights: [response.data, ...this.state.flights] });
+        });
+      }
 
-                <button>Cancel</button>
-                <button>Confirm</button>
-            </div>
-        )
+      render() {
+        return (
+          <div>
+            <h1>ADMIN: Chart a new flight into the skies</h1>
+            <FlightForm onSubmit={this.saveFlight} />
+            <FlightsList flights={this.state.flights} />
+          </div>
+        );
+      }
     }
-}
 
-export default Flights 
+    const FlightForm = (props) => {
+        const [content, setContent] = useState("");
+      
+    const _handleSubmit = (e) => {
+        e.preventDefault();
+        props.onSubmit(content);
+        console.log(content);
+        console.log(content.name);
+        setContent("");
+    };
+
+    const _handleChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setContent((values) => ({ ...values, [name]: value }));
+        };
+
+        return (
+            <form onSubmit={_handleSubmit}>
+              <input
+                onChange={_handleChange}
+                name="name"
+                type="text"
+                placeholder="name"
+                required
+              />
+              <input
+                onChange={_handleChange}
+                name="date"
+                type="date"
+                placeholder="date"
+                required
+              />
+              <input
+                onChange={_handleChange}
+                name="from"
+                type="text"
+                placeholder="from"
+                required
+              />
+                <input
+                onChange={_handleChange}
+                name="to"
+                type="text"
+                placeholder="to"
+                required
+              />
+                <input
+                onChange={_handleChange}
+                name="plane"
+                type="text"
+                placeholder="plane"
+                required
+              />
+              <input type="submit" value="Create New Flight" />
+            </form>
+          );
+        };
+
+        const FlightsList = (props) => {
+            return (
+              <div>
+                <h3>There are {props.flights.length} total flights scheduled to fly. </h3>
+          
+          
+                {props.flights.map((f) => (
+                  <p> Flight Number: { f.name } Date: {f.date} From: {f.from} To: {f.to} Airplane: {f.plane} <br></br></p>
+                  
+                ))}
+              </div>
+            );
+          };
+
+
+export default Flights

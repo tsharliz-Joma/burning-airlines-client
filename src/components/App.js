@@ -103,12 +103,12 @@ export default class App extends Component {
               }
             />
             <Route path="airplanes" element={<Airplanes />} />
+            <Route path="flights" element={<Flights />} />
             <Route path="flight">
               <Route
                 path=":flightId"
                 element={<Flight currentUser={this.state.currentUser} />}
               />
-              <Route path="flights" element={<Flights />} />
             </Route>
           </Routes>
         </BrowserRouter>
