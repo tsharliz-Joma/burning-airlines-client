@@ -5,17 +5,6 @@ import axios from "axios";
 const SEARCH_URL = `http://localhost:3000/search/`
 
 class Search extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     from: "",
-  //     to: "",
-  //     flights: []
-  //   };
-
-  //   this.searchFlights = this.searchFlights.bind(this)
-  // }
-
   render() {
     return (
       <div>
@@ -23,24 +12,6 @@ class Search extends Component {
         <h2>Current user ID: {this.props.currentUser}</h2>
 
         <SearchForm />
-        
-        {/* {
-          this.state.flights.map((flight) => {
-          return(
-            <div>
-              <ul>
-                <h3>Flight: { flight.name } </h3>
-                <li><em>To:</em> { flight.to }</li>
-                <li><em>From:</em> { flight.from }</li>
-                <li>Date: { flight.date } </li>
-                <li>Plane: { flight.plane } </li>
-              </ul>
-            </div>
-            )
-          }
-          )
-        } */}
-      
       </div>
     );
   }
