@@ -119,7 +119,6 @@ class Flights extends Component {
             </select>
             </label>
               <input type="submit" value="Create New Flight" />
-              <img src={"../src/images/fire-animated.jpeg"} alt="fire" />
             </form>
           );
         };

@@ -27,6 +27,7 @@ const SearchForm = () => {
   const _handleSubmit = (event) => {
     event.preventDefault();
     axios(SEARCH_URL + from + '/' + to + '.json').then((response) => {
+      console.log(setFlights(response.data))
       setFlights(response.data);
     })
 
